@@ -216,7 +216,7 @@
                     <button onclick="openPolicyModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all shadow-sm"><i data-lucide="plus-circle" size="18"></i> Nova Apólice</button>
                     <button onclick="triggerExportMenu('pdf')" class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all shadow-sm"><i data-lucide="file-down" size="18"></i> PDF</button>
                     <button onclick="triggerExportMenu('excel')" class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all shadow-sm"><i data-lucide="sheet" size="18"></i> Excel</button>
-                    <button id="btn-logout-main" class="p-2 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg shadow-sm transition-all border border-red-100" title="Sair"><i data-lucide="log-out" size="20"></i></button>
+                    <button onclick="logoutSystem()" class="p-2 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg shadow-sm transition-all border border-red-100" title="Sair"><i data-lucide="log-out" size="20"></i></button>
                 </div>
             </header>
 
@@ -224,19 +224,31 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
                     <div class="p-3 bg-blue-50 rounded-lg text-blue-600"><i data-lucide="layers"></i></div>
-                    <div><p class="text-sm text-gray-500 font-medium">Apólices Vigentes</p><p id="stat-total-policies" class="text-2xl font-bold text-gray-900">0</p></div>
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Apólices Vigentes</p>
+                        <p id="stat-total-policies" class="text-2xl font-bold text-gray-900">0</p>
+                    </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 text-left">
                     <div class="p-3 bg-green-50 rounded-lg text-green-600"><i data-lucide="truck"></i></div>
-                    <div class="flex-1"><p class="text-sm text-gray-500 font-medium">Frotas Ativas</p><p id="stat-total-fleets" class="text-2xl font-bold text-gray-900">0</p></div>
+                    <div class="flex-1">
+                        <p class="text-sm text-gray-500 font-medium">Frotas Ativas</p>
+                        <p id="stat-total-fleets" class="text-2xl font-bold text-gray-900">0</p>
+                    </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 text-left">
                     <div class="p-3 bg-purple-50 rounded-lg text-purple-600"><i data-lucide="trending-up"></i></div>
-                    <div class="flex-1"><p class="text-sm text-gray-500 font-medium">Custo Mensal Ativo</p><p id="stat-monthly-cost" class="text-2xl font-bold text-gray-900">R$ 0,00</p></div>
+                    <div class="flex-1">
+                        <p class="text-sm text-gray-500 font-medium">Custo Mensal Ativo</p>
+                        <p id="stat-monthly-cost" class="text-2xl font-bold text-gray-900">R$ 0,00</p>
+                    </div>
                 </div>
                 <div id="expiry-card" onclick="openNearestExpiry()" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 transition-all cursor-pointer hover:shadow-md group">
                     <div id="expiry-card-icon" class="p-3 bg-orange-50 rounded-lg text-orange-600 group-hover:scale-110 transition-transform"><i data-lucide="calendar"></i></div>
-                    <div><p class="text-sm text-gray-500 font-medium">Próximo Vencimento</p><p id="stat-next-expiry" class="text-2xl font-bold text-gray-900">-</p></div>
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Próximo Vencimento</p>
+                        <p id="stat-next-expiry" class="text-2xl font-bold text-gray-900">-</p>
+                    </div>
                 </div>
             </div>
 
@@ -244,8 +256,12 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 pt-6 border-b border-gray-100 bg-white flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div class="flex gap-8">
-                        <button onclick="setTab('vigentes')" id="tab-vigentes" class="pb-4 text-sm font-medium transition-all tab-active">Vigentes</button>
-                        <button onclick="setTab('historico')" id="tab-historico" class="pb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-all">Histórico</button>
+                        <button onclick="setTab('vigentes')" id="tab-vigentes" class="pb-4 text-sm font-medium transition-all tab-active">
+                            Apólices Vigentes
+                        </button>
+                        <button onclick="setTab('historico')" id="tab-historico" class="pb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-all">
+                            Histórico (Vencidas)
+                        </button>
                     </div>
                     <div class="relative max-w-sm w-full pb-4">
                         <i data-lucide="search" size="18" class="absolute left-3 top-1/2 -translate-y-[calc(50%+8px)] text-gray-400"></i>
@@ -286,7 +302,7 @@
                         <label class="text-xs font-bold text-gray-500 uppercase">Logotipo</label>
                         <div class="flex items-center gap-3 mt-1">
                             <input type="file" id="cfg-logo-input" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
-                            <button onclick="removeLogo()" class="p-2 text-red-500 bg-red-50 rounded-lg"><i data-lucide="image-minus" size="18"></i></button>
+                            <button onclick="removeLogo()" class="p-2 text-red-500 hover:bg-red-50 rounded-lg"><i data-lucide="image-minus" size="18"></i></button>
                         </div>
                     </div>
                 </div>
@@ -303,10 +319,10 @@
                     <button onclick="toggleModal('exportModal')" class="text-gray-400 hover:text-gray-600"><i data-lucide="x"></i></button>
                 </div>
                 <div class="p-6 space-y-4">
-                    <p class="text-sm font-semibold text-gray-700 mb-2 text-center">Selecione o relatório:</p>
+                    <p class="text-sm font-semibold text-gray-700 mb-2 text-center">Selecione o relatório desejado:</p>
                     <button onclick="runExport('consolidated')" class="w-full text-left p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-blue-50 transition-all flex items-center gap-3">
                         <div id="exportIconBox" class="p-2 bg-blue-600 text-white rounded-lg"><i data-lucide="files" size="20"></i></div>
-                        <div><p class="font-bold text-slate-900">Relatório Consolidado</p></div>
+                        <div><p class="font-bold text-slate-900">Relatório Consolidado</p><p class="text-xs text-gray-500">Agrupar frotas separadas por apólice.</p></div>
                     </button>
                     <div id="export-policy-list" class="space-y-2 max-h-48 overflow-y-auto custom-scroll pr-2"></div>
                 </div>
@@ -316,7 +332,7 @@
         <div id="policyModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
             <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
                 <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-slate-50">
-                    <h3 id="policyModalTitle" class="text-xl font-bold text-slate-900">Apólice</h3>
+                    <h3 id="policyModalTitle" class="text-xl font-bold text-slate-900">Configurar Apólice</h3>
                     <button onclick="toggleModal('policyModal')" class="text-gray-400 hover:text-gray-600"><i data-lucide="x"></i></button>
                 </div>
                 <form id="policyForm" class="flex-1 overflow-y-auto p-6 custom-scroll">
@@ -352,11 +368,11 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Configuração do Firebase
-        const appId = 'gestaoseg-db857'; // Fixado para evitar duplicação de tabelas por geração
+        const appId = 'gestaoseg-db857';
         const firebaseConfig = {
             apiKey: "AIzaSyCraG5cocBaJQnVI51tBybcz-_XnvLDvVs",
             authDomain: "gestaoseg-db857.firebaseapp.com",
@@ -378,10 +394,12 @@
         let nextExpiryPolicyId = null;
         let currentUser = null;
         let unsubscribeFirestore = null;
+        let isManualLogout = false;
 
         // --- Toaster Logic ---
-        function showToast(message, type = 'info') {
+        const showToast = (message, type = 'info') => {
             const container = document.getElementById('toast-container');
+            if (!container) return;
             const toast = document.createElement('div');
             toast.className = `toast border-l-4 ${type === 'error' ? 'border-red-500' : 'border-emerald-500'}`;
             
@@ -401,21 +419,21 @@
                 toast.classList.remove('show');
                 setTimeout(() => toast.remove(), 300);
             }, 4000);
-        }
+        };
 
         let confirmCallback = null;
-        function showConfirmToast(callback) {
+        const showConfirmToast = (callback) => {
             confirmCallback = callback;
             document.getElementById('overlay').classList.add('show');
             document.getElementById('confirm-toast').classList.add('show');
             lucide.createIcons();
-        }
+        };
 
-        function hideConfirmToast() {
+        const hideConfirmToast = () => {
             document.getElementById('overlay').classList.remove('show');
             document.getElementById('confirm-toast').classList.remove('show');
             confirmCallback = null;
-        }
+        };
 
         document.getElementById('confirm-cancel').onclick = hideConfirmToast;
         document.getElementById('confirm-ok').onclick = async () => {
@@ -423,16 +441,33 @@
             hideConfirmToast();
         };
 
+        // --- PDF Helper ---
+        const drawPolicyHeader = (doc, p, y) => {
+            const w = doc.internal.pageSize.getWidth();
+            doc.setFontSize(10); doc.setFillColor(250, 250, 250); doc.rect(15, y, w-30, 18, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.text('SEGURADORA / APÓLICE:', 20, y + 7); doc.text('DOC. ESCRITURAÇÃO:', 20, y + 13);
+            doc.text('VIGÊNCIA:', 150, y + 7); doc.text('VALOR TOTAL:', 150, y + 13);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`${p.insurer} - ${p.policyNumber}`, 68, y + 7); doc.text(p.docNumber || '', 68, y + 13);
+            doc.text(`${formatDate(p.startDate)} a ${formatDate(p.endDate)}`, 180, y + 7); doc.text(formatCurrency(p.totalValue), 180, y + 13);
+            return y + 25;
+        };
+
         // --- Auth Observer ---
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
+                isManualLogout = false;
                 enterSystemUI();
                 initFirestore();
             } else {
                 currentUser = null;
-                showLoginUI();
-                if (unsubscribeFirestore) unsubscribeFirestore();
+                if (!isManualLogout) {
+                    try { await signInAnonymously(auth); } catch (e) { showLoginUI(); }
+                } else {
+                    showLoginUI();
+                }
             }
         });
 
@@ -441,36 +476,38 @@
             const email = document.getElementById('auth-email').value;
             const password = document.getElementById('auth-password').value;
             if(!email || !password) {
-                showToast("Preencha e-mail e senha.", "error");
+                showToast("Preencha e-mail e senha corporativos.", "error");
                 return;
             }
             
             try {
-                // Definindo persistência de sessão para evitar login automático eterno se desejado
-                //await setPersistence(auth, browserSessionPersistence);
-                await signInWithEmailAndPassword(auth, email, password);
-                
+                // Tentativa segura de redimensionar e maximizar
                 try {
                     const elem = document.documentElement;
-                    if (elem.requestFullscreen) elem.requestFullscreen().catch(()=>{});
-                } catch(e){}
+                    const requestFS = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
+                    if (requestFS) requestFS.call(elem).catch(() => {});
+                    window.moveTo(0, 0);
+                    window.resizeTo(screen.availWidth, screen.availHeight);
+                } catch (e) {}
+
+                await signInWithEmailAndPassword(auth, email, password);
             } catch (e) {
-                showToast("Senha ou e-mail incorretos.", "error");
+                showToast("Falha no acesso: Verifique se o e-mail e a senha estão corretos.", "error");
             }
         };
 
         document.getElementById('btn-login').onclick = window.enterSystem;
 
         // --- Logout Action ---
-        document.getElementById('btn-logout-main').onclick = () => {
+        window.logoutSystem = () => {
             showConfirmToast(async () => {
                 try {
+                    isManualLogout = true;
                     if (unsubscribeFirestore) unsubscribeFirestore();
                     await signOut(auth);
-                    // O recarregamento garante que o estado da memória e UI seja limpo
                     window.location.reload();
                 } catch (e) {
-                    showToast("Erro ao sair.", "error");
+                    showToast("Erro ao encerrar sessão.", "error");
                 }
             });
         };
@@ -478,7 +515,10 @@
         // --- Firestore Initialization ---
         function initFirestore() {
             if (!currentUser) return;
+            if (unsubscribeFirestore) unsubscribeFirestore();
+
             const policiesCollection = collection(db, 'artifacts', appId, 'public', 'data', 'policies');
+            
             unsubscribeFirestore = onSnapshot(policiesCollection, (snapshot) => {
                 policies = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderTable();
@@ -487,8 +527,8 @@
                 checkExpirations();
             }, (error) => {
                 console.error("Erro Firestore:", error);
-                if(error.code === 'permission-denied') {
-                   showToast("Sem permissão de leitura no Firebase.", "error");
+                if (error.code === 'permission-denied') {
+                    showToast("Acesso negado ao banco de dados.", "error");
                 }
             });
         }
@@ -511,7 +551,8 @@
         };
 
         window.toggleModal = (id) => {
-            document.getElementById(id).classList.toggle('hidden');
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.toggle('hidden');
             if (id === 'exportModal') updateExportList();
         };
 
@@ -532,7 +573,10 @@
         };
 
         window.removeFleetRow = (id) => {
-            if (document.querySelectorAll('.fleet-row').length > 1) document.getElementById(id).remove();
+            if (document.querySelectorAll('.fleet-row').length > 1) {
+                const el = document.getElementById(id);
+                if (el) el.remove();
+            }
         };
 
         window.openPolicyModal = () => {
@@ -566,6 +610,9 @@
             let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
             months = months <= 0 ? 1 : months;
             
+            const vPerFleet = totalValue / fleets.length;
+            const mPerFleet = (totalValue / months) / fleets.length;
+
             const policyData = {
                 insurer: formData.get('insurer'),
                 docNumber: formData.get('docNumber'),
@@ -575,15 +622,16 @@
                 startDate: startStr,
                 endDate: endStr,
                 months,
-                fleets: fleets.map(f => ({ ...f, valueTotal: totalValue / fleets.length, valueMonthly: (totalValue / months) / fleets.length }))
+                fleets: fleets.map(f => ({ ...f, valueTotal: vPerFleet, valueMonthly: mPerFleet }))
             };
 
+            const docId = currentEditingId || Date.now().toString();
             try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'policies', currentEditingId || Date.now().toString()), policyData);
-                showToast("Dados salvos com sucesso!");
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'policies', docId), policyData);
+                showToast("Apólice salva com sucesso!");
                 toggleModal('policyModal');
             } catch (e) {
-                showToast("Erro de permissão no Firebase.", "error");
+                showToast("Erro ao salvar no Firebase.", "error");
             }
         };
 
@@ -605,9 +653,13 @@
 
         window.deletePolicy = async (id) => {
             if (!currentUser) return;
-            if (confirm('Excluir esta apólice?')) {
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'policies', id));
-                showToast("Apólice removida.");
+            if (confirm('Excluir esta apólice permanentemente?')) {
+                try {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'policies', id));
+                    showToast("Apólice excluída.");
+                } catch (e) {
+                    showToast("Erro ao excluir.", "error");
+                }
             }
         };
 
@@ -615,6 +667,7 @@
             const p = policies.find(x => x.id === id);
             if (!p) return;
             const content = document.getElementById('viewModalContent');
+            if (!content) return;
             content.innerHTML = `
                 <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
                     <div><h3 class="text-xl font-bold">${p.insurer}</h3><p class="text-xs text-slate-400">Apólice: ${p.policyNumber} | Doc: ${p.docNumber}</p></div>
@@ -626,12 +679,7 @@
                         <div class="bg-gray-50 p-3 rounded-lg border border-gray-100"><p class="text-[10px] font-bold text-gray-400">Valor Total</p><p class="text-sm font-semibold text-blue-600">${formatCurrency(p.totalValue)}</p></div>
                         <div class="bg-gray-50 p-3 rounded-lg border border-gray-100"><p class="text-[10px] font-bold text-gray-400">Apropriação Mensal</p><p class="text-sm font-semibold text-green-600">${formatCurrency(p.monthlyValue)}</p></div>
                     </div>
-                    <div class="border rounded-xl overflow-hidden">
-                        <table class="w-full text-xs text-left">
-                            <thead class="bg-gray-100"><tr><th class="px-4 py-2">Frota</th><th class="px-4 py-2 text-right">Mês</th></tr></thead>
-                            <tbody>${(p.fleets || []).map(f => `<tr><td class="px-4 py-3 font-semibold text-gray-800">${f.name}<br><span class="text-[10px] text-gray-400">${f.costCenter}</span></td><td class="px-4 py-3 text-right font-bold text-green-600">${formatCurrency(f.valueMonthly)}</td></tr>`).join('')}</tbody>
-                        </table>
-                    </div>
+                    <div class="border rounded-xl overflow-hidden"><table class="w-full text-xs text-left"><thead class="bg-gray-100"><tr><th class="px-4 py-2">Frota</th><th class="px-4 py-2 text-right">Mês</th></tr></thead><tbody>${(p.fleets || []).map(f => `<tr><td class="px-4 py-3 font-semibold text-gray-800">${f.name}<br><span class="text-[10px] text-gray-400">${f.costCenter} | ${f.glAccount}</span></td><td class="px-4 py-3 text-right font-bold text-green-600">${formatCurrency(f.valueMonthly)}</td></tr>`).join('')}</tbody></table></div>
                 </div>
             `;
             if(document.getElementById('viewModal').classList.contains('hidden')) toggleModal('viewModal');
@@ -641,7 +689,7 @@
         window.triggerExportMenu = (mode) => {
             exportMode = mode;
             const titleEl = document.getElementById('exportModalTitle');
-            titleEl.innerText = mode === 'pdf' ? "Exportar Relatório PDF" : "Exportar Relatório Excel";
+            if (titleEl) titleEl.innerText = mode === 'pdf' ? "Exportar Relatório PDF" : "Exportar Relatório Excel";
             toggleModal('exportModal');
         };
 
@@ -652,9 +700,10 @@
 
         function renderTable() {
             const tbody = document.getElementById('policyTableBody');
+            if (!tbody) return;
             const filtered = policies.filter(p => activeTab === 'vigentes' ? !isExpired(p) : isExpired(p));
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-gray-400 font-medium italic">Nenhum dado encontrado.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-gray-400 font-medium italic">Nenhum registro para esta seleção.</td></tr>`;
                 return;
             }
             tbody.innerHTML = filtered.map(p => `
@@ -665,9 +714,9 @@
                     <td class="px-6 py-4 text-right font-medium">${formatCurrency(p.totalValue)}</td>
                     <td class="px-6 py-4 text-right"><div class="font-bold text-emerald-600">${formatCurrency(p.monthlyValue)}</div><div class="text-[10px] text-gray-400 uppercase">${p.months} meses</div></td>
                     <td class="px-6 py-4 flex justify-center gap-2">
-                        <button onclick="viewPolicy('${p.id}')" class="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"><i data-lucide="eye" size="18"></i></button>
-                        <button onclick="editPolicy('${p.id}')" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors"><i data-lucide="edit" size="18"></i></button>
-                        <button onclick="deletePolicy('${p.id}')" class="p-2 text-red-400 hover:bg-red-50 rounded-lg transition-colors"><i data-lucide="trash-2" size="18"></i></button>
+                        <button onclick="viewPolicy('${p.id}')" class="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors" title="Visualizar"><i data-lucide="eye" size="18"></i></button>
+                        <button onclick="editPolicy('${p.id}')" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Editar"><i data-lucide="edit" size="18"></i></button>
+                        <button onclick="deletePolicy('${p.id}')" class="p-2 text-red-400 hover:bg-red-50 rounded-lg transition-colors" title="Excluir"><i data-lucide="trash-2" size="18"></i></button>
                     </td>
                 </tr>`).join('');
             lucide.createIcons();
@@ -675,17 +724,23 @@
 
         function updateStats() {
             const vigentes = policies.filter(p => !isExpired(p));
-            document.getElementById('stat-total-policies').innerText = vigentes.length;
-            document.getElementById('stat-total-fleets').innerText = vigentes.reduce((acc, p) => acc + (p.fleets?.length || 0), 0);
-            document.getElementById('stat-monthly-cost').innerText = formatCurrency(vigentes.reduce((acc, p) => acc + (p.monthlyValue || 0), 0));
+            const polEl = document.getElementById('stat-total-policies');
+            const flEl = document.getElementById('stat-total-fleets');
+            const costEl = document.getElementById('stat-monthly-cost');
+            const expEl = document.getElementById('stat-next-expiry');
+
+            if (polEl) polEl.innerText = vigentes.length;
+            if (flEl) flEl.innerText = vigentes.reduce((acc, p) => acc + (p.fleets?.length || 0), 0);
+            if (costEl) costEl.innerText = formatCurrency(vigentes.reduce((acc, p) => acc + (p.monthlyValue || 0), 0));
+            
             if(vigentes.length > 0) {
                 const dates = vigentes.map(p => ({ id: p.id, d: parseLocalDate(p.endDate) }));
                 const min = dates.reduce((prev, curr) => (prev.d < curr.d) ? prev : curr);
                 nextExpiryPolicyId = min.id;
-                document.getElementById('stat-next-expiry').innerText = formatDate(min.d.toISOString().split('T')[0]);
+                if (expEl) expEl.innerText = formatDate(min.d.toISOString().split('T')[0]);
             } else {
                 nextExpiryPolicyId = null;
-                document.getElementById('stat-next-expiry').innerText = "-";
+                if (expEl) expEl.innerText = "-";
             }
         }
 
@@ -693,8 +748,11 @@
             if (nextExpiryPolicyId) {
                 const p = policies.find(x => x.id === nextExpiryPolicyId);
                 if (p) {
-                    document.getElementById('tableSearch').value = p.policyNumber;
-                    filterTable();
+                    const input = document.getElementById('tableSearch');
+                    if (input) {
+                        input.value = p.policyNumber;
+                        filterTable();
+                    }
                 }
             }
         };
@@ -712,13 +770,15 @@
                 return Math.ceil(diff / (1000 * 60 * 60 * 24)) <= 10 && diff >= 0;
             });
             const banner = document.getElementById('expiry-alert-banner');
+            const card = document.getElementById('expiry-card');
             if (soon.length > 0) {
-                banner.classList.remove('hidden');
-                document.getElementById('expiry-alert-text').innerText = `${soon.length} apólice(s) vencendo em breve.`;
-                document.getElementById('expiry-card').classList.add('alert-pulse', 'border-red-200');
+                if (banner) banner.classList.remove('hidden');
+                const text = document.getElementById('expiry-alert-text');
+                if (text) text.innerText = `${soon.length} apólice(s) vencendo em breve.`;
+                if (card) card.classList.add('alert-pulse', 'border-red-200');
             } else {
-                banner.classList.add('hidden');
-                document.getElementById('expiry-card').classList.remove('alert-pulse', 'border-red-200');
+                if (banner) banner.classList.add('hidden');
+                if (card) card.classList.remove('alert-pulse', 'border-red-200');
             }
         }
 
@@ -737,20 +797,28 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('l', 'mm', 'a4');
             const w = doc.internal.pageSize.getWidth();
+            const h = doc.internal.pageSize.getHeight();
             let y = 15;
+
             if (companyConfig.logo) { try { doc.addImage(companyConfig.logo, 'PNG', 15, y, 30, 15); } catch(e){} }
             doc.setFontSize(14); doc.setFont('helvetica', 'bold'); doc.text(companyConfig.name.toUpperCase(), companyConfig.logo ? 50 : 15, y + 7);
             doc.setFontSize(8); doc.text(`Relatório: ${new Date().toLocaleString('pt-BR')}`, w-15, y + 5, { align: 'right' });
             y += 25;
+
             const targets = typeOrId === 'consolidated' ? policies : policies.filter(p => p.id === typeOrId);
             doc.setFontSize(16); doc.text(typeOrId === 'consolidated' ? 'RELATÓRIO CONSOLIDADO' : 'RELATÓRIO INDIVIDUAL', w/2, y, { align: 'center' });
             y += 10;
+
             let grandTotalM = 0;
             targets.forEach(p => {
-                if (y + 50 > doc.internal.pageSize.getHeight()) { doc.addPage(); y = 20; }
+                if (y + 50 > h) { doc.addPage(); y = 20; }
                 y = drawPolicyHeader(doc, p, y);
                 let subT = 0;
-                const rows = (p.fleets || []).map(f => { subT += (f.valueMonthly || 0); grandTotalM += (f.valueMonthly || 0); return [f.name, p.insurer+'/'+p.policyNumber, p.docNumber, f.costCenter, f.glAccount, formatCurrency(f.valueTotal), formatCurrency(f.valueMonthly)]; });
+                const rows = (p.fleets || []).map(f => {
+                    const monthly = f.valueMonthly || 0;
+                    subT += monthly; grandTotalM += monthly;
+                    return [f.name, p.insurer+'/'+p.policyNumber, p.docNumber, f.costCenter, f.glAccount, formatCurrency(f.valueTotal), formatCurrency(monthly)];
+                });
                 doc.autoTable({
                     startY: y, head: [['FROTA', 'SEGURADORA / APÓLICE', 'DOC. ESCRITURAÇÃO', 'CENTRO CUSTO', 'CONTA', 'VLR TOTAL (FROTA)', 'VLR MENSAL']],
                     body: rows, theme: 'striped', headStyles: { fillColor: [26, 58, 90], halign: 'center', fontSize: 8 }, styles: { fontSize: 8 },
@@ -775,7 +843,11 @@
                 aoa.push(["VIGÊNCIA:", formatDate(p.startDate) + " a " + formatDate(p.endDate), "VALOR TOTAL:", p.totalValue]);
                 aoa.push(["FROTA", "CENTRO CUSTO", "CONTA", "VLR TOTAL FROTA", "APROPRIAÇÃO MENSAL"]);
                 let subM = 0;
-                (p.fleets || []).forEach(f => { aoa.push([f.name, f.costCenter, f.glAccount, f.valueTotal, f.valueMonthly]); subM += (f.valueMonthly || 0); });
+                (p.fleets || []).forEach(f => {
+                    const monthly = f.valueMonthly || 0;
+                    aoa.push([f.name, f.costCenter, f.glAccount, f.valueTotal, monthly]);
+                    subM += monthly;
+                });
                 aoa.push(["SUBTOTAL DA APÓLICE", "", "", "", subM]);
                 aoa.push([]);
             });
@@ -788,7 +860,7 @@
             const nameInput = document.getElementById('cfg-company-name').value;
             const logoInput = document.getElementById('cfg-logo-input');
             companyConfig.name = nameInput || 'Gestão de Seguros e Frotas';
-            if (logoInput.files && logoInput.files[0]) {
+            if (logoInput && logoInput.files && logoInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     companyConfig.logo = e.target.result;
@@ -806,11 +878,14 @@
             }
         };
 
-        window.removeLogo = () => { if(confirm('Remover logotipo?')) { companyConfig.logo = null; saveSettings(); } };
+        window.removeLogo = () => { if(confirm('Remover logotipo?')) { companyConfig.logo = null; window.saveSettings(); } };
 
         function applySettings() {
             const nameEl = document.getElementById('display-company-name');
             if(nameEl) nameEl.innerText = companyConfig.name;
+            const cfgName = document.getElementById('cfg-company-name');
+            if(cfgName) cfgName.value = companyConfig.name;
+            
             const container = document.getElementById('display-logo-container');
             const img = document.getElementById('display-logo');
             if (companyConfig.logo && container && img) { img.src = companyConfig.logo; container.classList.remove('hidden'); }
